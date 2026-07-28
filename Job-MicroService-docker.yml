@@ -1,1 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/Job_MicroService
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+
+management:
+  tracing:
+    export:
+      zipkin:
+        endpoint: http://zipkin:9411/api/v2/spans
