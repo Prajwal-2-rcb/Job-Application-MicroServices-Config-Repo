@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: Review-Microservice
+
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/Review_Microservice}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Prajwal@123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+    hibernate:
+      ddl-auto: ${DDL_AUTO:create-drop}
+
+    show-sql: ${SHOW_SQL:true}
+
+server:
+  port: ${SERVER_PORT:8082}
+
+  servlet:
+    context-path: /api/v1
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+    service-url:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka/}
+
+  instance:
+    prefer-ip-address: true
+    hostname: ${HOST_NAME:localhost}
