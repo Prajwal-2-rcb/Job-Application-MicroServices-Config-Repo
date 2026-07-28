@@ -1,1 +1,55 @@
+spring:
+  application:
+    name: Job-MicroService
 
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/Job_MicroService}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Prajwal@123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+    hibernate:
+      ddl-auto: ${DDL_AUTO:create-drop}
+
+    show-sql: ${SHOW_SQL:true}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+  servlet:
+    context-path: /api/v1
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+
+    service-url:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka/}
+
+  instance:
+    prefer-ip-address: true
+    hostname: ${HOST_NAME:localhost}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      companyBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        sliding-window-type: count_based
+
+  ratelimiter:
+    instances:
+      companyBreaker:
+        limit-for-period: 2
+        limit-refresh-period: 10s
+        timeout-duration: 0
