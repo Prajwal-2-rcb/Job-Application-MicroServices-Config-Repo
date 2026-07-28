@@ -1,1 +1,21 @@
+management:
+  tracing:
+    sampling:
+      probability: ${TRACING_SAMPLING_PROBABILITY:1.0}
 
+    export:
+      zipkin:
+        endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+
+  endpoints:
+    web:
+      exposure:
+        include: ${ACTUATOR_EXPOSE:*}
+
+  endpoint:
+    health:
+      show-components: always
+
+logging:
+  level:
+    root: INFO
